@@ -114,6 +114,7 @@ function populate() {
   new Questions('chevy', 'What movie did Chevy Chase star in with Gregory Hines?', 'Deal Of The Century', 'The couch Trip', 'Running Scared', 'Modern Problems', 1);
 }
 populate();
+document.getElementById('populate-question').hidden = true;
 
 function randomQuestion() {
   var randomNumber = Math.floor(Math.random() * chosenCategory.length);
@@ -121,6 +122,8 @@ function randomQuestion() {
   noRepeats(newQuestion);
   sendQuestion();
   alreadyShown.push(newQuestion);
+  
+
 }
 
 function noRepeats(question){
@@ -136,6 +139,7 @@ function noRepeats(question){
 
 //Function that sends the questions to the form on the game screen
 function sendQuestion() {
+  document.getElementById('populate-question').hidden = false;
   question;
   question.textContent = newQuestion.question;
   ans1;
@@ -149,31 +153,30 @@ function sendQuestion() {
 }
 
 //Function that checks for the correct answer and adds the points
+var hideMe = document.getElementById('answers');
 function pickAnswer(event) {
   event.preventDefault();
   target = event.target.id;
   console.log(target);
   console.log(newQuestion.correctAns);
   if('ans' + newQuestion.correctAns === target) {
-    // answers.removeEventListener('click', pickAnswer);
+    answers.removeEventListener('click', pickAnswer);
     totalPoints += 50;
     localStorage.setItem('totalPoints', totalPoints);
     console.log(totalPoints, target);
-    alert('CORRECT');
-    randomQuestion();
-    // var correctAns = document.getElementById('question');
-    // correctAns.textContent = 'CORRECT!';
-    // document.getElementById('answers').hidden = true;
-
-
-  } else {
-
-    // answers.removeEventListener('click', pickAnswer);
-
-    //TODO18 Need incorrect indication for user
-  }
+    var correctAns = document.getElementById('question');
+    correctAns.textContent = 'You have chosen wisely! you now have ' + totalPoints + ' points total' + ' Pick another one!';
+    categories.addEventListener('click', pickCategory);
+    document.getElementById('answers').hidden = true;
+    
+  } if ('ans' + newQuestion.correctAns !== target) {
+    totalPoints += -10;
+    var wrongAns = document.getElementById('question');
+    wrongAns.textContent = 'Wrong! you have lost 10 points, choose wisely';
+  }   
   checkTen();
 }
+
 
 //Function that runs when the user has answered ten questions, display scoreboard
 function checkTen() {
@@ -197,6 +200,7 @@ function checkTen() {
 //Function that runs when a player chooses a category
 function pickCategory(event) {
   event.preventDefault();
+  document.getElementById('answers').hidden = false;
   answers.addEventListener('click', pickAnswer);
   target = event.target.id;
   if(target === 'cult') {
@@ -213,6 +217,7 @@ function pickCategory(event) {
     chosenCategory = chevyQuestions;
   }
   randomQuestion();
+  
 }
 
 /*Function to create local storage
@@ -228,6 +233,8 @@ addLocalStorageOfUserScore();*/
 categories.addEventListener('click', pickCategory);
 answers.addEventListener('click', pickAnswer);
 //comments.addEventListener('enter', sendComments);
+
+
 
 
 
