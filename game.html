@@ -12,8 +12,11 @@
         <a href="index.html"><img src="img/retroflash-logo-01.png" alt='Retro Flash Logo'></a>
       <ul class="nav-center">
         <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
           <a href="game.html">Play the Game</a>
-          </li>
+        </li>
         <li>
           <a href="contact.html">Submit a Question</a>
         </li>
@@ -24,7 +27,15 @@
     </nav>
     </header>
     <h1>Play the Game</h1>
-    <p>Pick a category below. </p>
+    <p id="directions">Choose a category below. If you answer the question correctly, you will be awarded 50 points. For each incorrect pick, you lose 10 points. You only have 10 turns to answer before the game is over so if you don't know the answer, it may be best to move on to a new question! Remember: "The way forward is sometimes the way back."</p>
+    <form id='categories'>
+      <button class ='buttons'><img id = 'cult' src = 'img/cult.jpg'/></button>
+      <button class ='buttons'><img id = 'action' src = 'img/action.jpg'/></button>
+      <button class ='buttons'><img id = 'scifi' src = 'img/scifi.jpg'/></button>
+      <button class ='buttons'><img id = 'horror' src = 'img/horror.jpg'/></button>
+      <button class ='buttons'><img id = 'magic' src = 'img/magic.jpg'/></button>
+      <button class ='buttons'><img id = 'chevy' src = 'img/chevy.jpg'/></button>
+    </form>  
     <div id="populate-question">
       <p id="question"></p> 
         <ul id="answers">
@@ -34,14 +45,6 @@
           <li id="ans4"></li>
         </ul>
     </div>
-    <form id='categories'>
-      <button class ='buttons'><img id = 'cult' src = 'img/cult.jpg'/></button>
-      <button class ='buttons'><img id = 'action' src = 'img/action.jpg'/></button>
-      <button class ='buttons'><img id = 'scifi' src = 'img/scifi.jpg'/></button>
-      <button class ='buttons'><img id = 'horror' src = 'img/horror.jpg'/></button>
-      <button class ='buttons'><img id = 'magic' src = 'img/magic.jpg'/></button>
-      <button class ='buttons'><img id = 'chevy' src = 'img/chevy.jpg'/></button>
-    </form>  
     <script src="js/app.js"></script>
   </body>
 </html>

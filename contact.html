@@ -7,8 +7,11 @@
     </head>
     <header>
       <nav>
-        <a href="index.html"><img src="img/retroflash-logo-01.png" alt='Retro Flash Logo'></a>
+          <a href="index.html"><img src="img/retroflash-logo-01.png" alt='Retro Flash Logo'></a>
         <ul class="nav-center">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
           <li>
             <a href="game.html">Play the Game</a>
           </li>
@@ -22,21 +25,26 @@
       </nav>
     </header>
     <body class="background-blue">
-     <div id=emailForm>
-       <form action= "mailto:RetroFlash@protonmail.com" method="post" enctype="text/plain">
-       Name: <br>
-       <input id="nameInput" type="text" name ="name">
-       <br>
-       Email address:
-       <input id="emailInput" type="text" name="mail">
-       <br>
-       Submit your question: 
-       <br>
-       <input id="commentInput" type="text" name="comment"> <br><br>
-       <input type="submit" value="send"> 
-       <input type= "reset" value="reset">
-       </form>
-     </div>     
+    <h1>Submit a Question</h1>
+      <fieldset>
+        <div id=emailForm>
+          <form action= "mailto:RetroFlash@protonmail.com" method="post" enctype="text/plain">
+          Name: 
+          <br>
+          <input id="nameInput" type="text" name ="name">
+          <br>
+          Email address:
+          <input id="emailInput" type="text" name="mail">
+          <br>
+          Submit your question: 
+          <br>
+          <input id="commentInput" type="text" name="comment"> <br><br>
+          <input type="submit" value="send"> 
+          <input type= "reset" value="reset">
+          </form>
+        </div> 
+      </fieldset>
+
      <div id="rickRoll">
         <video preload="auto" autoplay loop muted="muted" volume="0">
           <source src="videos/splash4.mp4" type="video/mp4">
@@ -44,8 +52,6 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=40" frameborder="0" allow="autoplay; encrypted-media"
           allowfullscreen></iframe>
      </div>
-
-
       <script src="app.js"></script>
     </body>
 

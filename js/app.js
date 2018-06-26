@@ -1,8 +1,7 @@
-
 'use strict';
 
 //Arrays of questions and more
-var alreadyShown = [];
+var target = 0;
 var totalPoints = 0;
 var questionsTotal = 0;
 var cultQuestions = [];
@@ -13,7 +12,7 @@ var magicQuestions = [];
 var chevyQuestions = [];
 var chosenCategory = [];
 var newQuestion = [];
-var target = 0;
+var alreadyShown = [];
 var question = document.getElementById('question');
 var ans1 = document.getElementById('ans1');
 var ans2 = document.getElementById('ans2');
@@ -28,7 +27,7 @@ console.log(horrorQuestions);
 console.log(magicQuestions);
 console.log(chevyQuestions);
 
-//TODO2 Constructor function to generate the question arrays
+//Constructor function to generate the question arrays
 function Questions(category, question, answer1, answer2, answer3, answer4, correctAns) {
   this.category = category;
   this.question = question;
@@ -52,7 +51,7 @@ function Questions(category, question, answer1, answer2, answer3, answer4, corre
   }
 }
 
-//TODO3 Function to send all of the questions and answers to the constructor function
+//Function to send all of the questions and answers to the constructor function
 function populate() {
   new Questions('cult', 'The Goonies search for which pirate\'s treasure?', 'Blackbeard', 'Davy Jones', 'Calico Jack', 'One Eyed-Willy', 4);
   new Questions('cult', 'Which 80s movie theme song was recorded in just 3 hours?', '"Oh Yeah" - Ferris Bueller\'s Day Off', '"Don\'t You (Forget About Me)" - The Breakfast Club', '"Storybook Love" - The Princess Bride', '"Ghostbusters" - Ghostbusters', 2);
@@ -75,6 +74,7 @@ function populate() {
   new Questions('chevy', 'In Three Amigos!, what did the Dusty Bottoms play for the other amigos to dance to in the cantina?', 'Arm in Arm', 'My Little Buttercup', 'Cheek to Cheek', 'My Love, Sweet Love', 2);
   new Questions('chevy', 'In National Lampoon\'s Christmas Vaction, which football team\'s hat did Clark wear?', 'Green Bay Packers', 'Chicago Bears', 'Pittsburgh Steelers', 'Kansas City Chiefs', 2);
   new Questions('chevy', 'In Caddyshack, Ty Webb and Judge Smails each bet what amount in the golf match?', '$20k', '$40k', '$60k', '$80k', 1);
+  new Questions('chevy', 'In Funny Farm, what hat does Andy wear for most of the film?', 'Chicago Cubs', 'New York Mets', 'Boston Red Sox', 'New York Yankees', 2);
   new Questions('action', 'In The Warriors, what famous line does Luther screech?', 'Just beat it', 'Come out to play', 'Let\'s get down to it', 'Truth or dare', 2);
   new Questions('action', 'In Escape from New York, what is the only thing that Snake asks for when escaping?', 'A Shower', 'Water', 'A Phone Call', 'A Ride', 4);
   new Questions('action', 'In They Live, Nada is here to, "Kick Ass and _____?"', 'Take Names', 'Take a Break', 'Right Wrongs', 'Chew Bubblegum', 4);
@@ -103,8 +103,18 @@ function populate() {
   new Questions('cult', 'David Lynch\'s Blue Velvet contains subtle references to which historical figure\'s assassination?', 'John F. Kennedy', 'Abraham Lincoln', 'Archduke Franz Ferdinand', 'Martin Luther King Jr.', 2);
   new Questions('cult', 'In the original script of Bill & Ted\'s Excellent Adventure, the time machine was a _____?', 'Treadmill', 'Van', 'Closet', 'Hot Tub', 2);
   new Questions('cult', 'Which movie on IMDB is rated out of 11 instead of 10?', 'Ghostbusters', 'RoboCop', 'Scarface', 'This is Spinal Tap', 4);
+  new Questions('chevy', 'How many National Lampoon\'s Vacation movies came out in the 80s?', 1, 2, 3, 4, 3);
+  new Questions('chevy', 'The Griswald family win a trip to Europe on what game show?', 'The Price Is Right', 'You Bet Your Life', 'Pig In A Poke', 'Wacky Wally World', 3);
+  new Questions('chevy', 'In National Lampoon\'s European Vacation, what Monty Python actor do the Griswalds litterally keep running into?', 'Eric Idle', 'John Cleese', 'Terry Gilliam', 'Terry Jones', 1);
+  new Questions('chevy', 'Which "Cheers" actor was in the movie Fletch with Chevy Chase', 'Woody Harrelson', 'Kelsey Grammer', 'George Wendt', 'Ted Danson', 3);
+  new Questions('cult', 'Who did not star in the 1982 classic, Fast Times at Ridgemont High?', 'Sean Penn', 'Forest Whitaker', 'Kevin Kline', 'Nicolas Cage', 3);
+  new Questions('chevy', 'What 1980 movie did Chevy Chase turn down a leading role in?', 'Airplane', 'American Gigolo', 'Stir Crazy', 'Private Benjamin', 2);
+  new Questions('chevy', 'What country was Emmett Fitz-Hume and Austin Millbarge sent to in Spies Like Us?', 'Saudi Arabia', 'Iran', 'Pakistan', 'Afghanistan', 3);
+  new Questions('cult', 'In Scarface, Tony Montana came to America from which country?', 'Columbia', 'Puerto Rico', 'Italy', 'Cuba', 4);
+  new Questions('chevy', 'What movie did Chevy Chase star in with Gregory Hines?', 'Deal Of The Century', 'The couch Trip', 'Running Scared', 'Modern Problems', 1);
 }
 populate();
+document.getElementById('populate-question').hidden = true;
 
 function randomQuestion() {
   var randomNumber = Math.floor(Math.random() * chosenCategory.length);
@@ -125,8 +135,9 @@ function noRepeats(question){
   }
 }
 
-//TODO5 Function that sends the questions to the form on the game screen
+//Function that sends the questions to the form on the game screen
 function sendQuestion() {
+  document.getElementById('populate-question').hidden = false;
   question;
   question.textContent = newQuestion.question;
   ans1;
@@ -148,17 +159,20 @@ function pickAnswer(event) {
   if('ans' + newQuestion.correctAns === target) {
     answers.removeEventListener('click', pickAnswer);
     totalPoints += 50;
-    console.log(totalPoints);
-    // var correctAns = document.getElementById('question');
-    // correctAns.textContent = 'CORRECT!';
-    // document.getElementById('answers').hidden = true;
-    //TODO17 Need correct indication for user
-  } else {
-    answers.removeEventListener('click', pickAnswer);
-    //TODO18 Need incorrect indication for user
+    localStorage.setItem('totalPoints', totalPoints);
+    console.log(totalPoints, target);
+    var correctAns = document.getElementById('question');
+    correctAns.textContent = 'You have chosen wisely! You now have ' + totalPoints + ' points.' + ' Pick another question.';
+    categories.addEventListener('click', pickCategory);
+    document.getElementById('answers').hidden = true;
+  } if ('ans' + newQuestion.correctAns !== target) {
+    totalPoints += -10;
+    var wrongAns = document.getElementById('question');
+    wrongAns.textContent = 'Wrong! You have lost 10 points. Try again or pick a new question.';
   }
   checkTen();
 }
+
 
 //Function that runs when the user has answered ten questions, display scoreboard
 function checkTen() {
@@ -173,15 +187,10 @@ function checkTen() {
   }
 }
 
-//Function to check if the user is a new or returning player
-if(!localStorage.userName) {
-  console.log('new user');
-  formSubmit();
-}
-
 //Function that runs when a player chooses a category
 function pickCategory(event) {
   event.preventDefault();
+  document.getElementById('answers').hidden = false;
   answers.addEventListener('click', pickAnswer);
   target = event.target.id;
   if(target === 'cult') {
@@ -205,12 +214,8 @@ categories.addEventListener('click', pickCategory);
 answers.addEventListener('click', pickAnswer);
 //comments.addEventListener('enter', sendComments);
 
-// function to create local storage
-function addLocalStorageOfUserScore(totalPoints) {
-  var localStorageData = JSON.stringify(totalPoints);
-  localStorage.setItem('totalPoints', localStorageData);
-  localStorage.getItem('totalPoints', localStorageData);
-  JSON.parse(localStorageData);
-}
-addLocalStorageOfUserScore();
+
+
+
+
 

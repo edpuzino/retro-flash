@@ -9,10 +9,10 @@ function formSubmit(){
 }
 
 function addLocalStorageOfUserName(user) {
-  var localStorageData = JSON.stringify(user);
-  localStorage.setItem('userName', localStorageData);
+  //var localStorageData = JSON.stringify(user);
+  localStorage.setItem('userName', user);/*
   localStorage.getItem('userName', localStorageData);
-  JSON.parse(localStorageData);
+  JSON.parse(localStorageData);*/
 }
 
 // move to app.js
