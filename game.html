@@ -27,22 +27,48 @@
     </nav>
     </header>
     <h1>Play the Game</h1>
-    <p id="directions">Choose a category below. If you answer the question correctly, you will be awarded 50 points. For each incorrect pick, you lose 10 points. You only have 10 turns to answer before the game is over so if you don't know the answer, it may be best to move on to a new question! Remember: "The way forward is sometimes the way back."</p>
+    <p id="directions">Choose a category below. If you answer the question correctly, you will be awarded 50 points. For each incorrect answer, you lose 10 points. If you get the question wrong, you can try again but you only have 10 turns to answer before the game is over so it may be best to move on to a new question! Remember: "The way forward is sometimes the way back."</p>
     <form id='categories'>
-      <button class ='buttons'><img id = 'cult' src = 'img/cult.jpg'/></button>
-      <button class ='buttons'><img id = 'action' src = 'img/action.jpg'/></button>
-      <button class ='buttons'><img id = 'scifi' src = 'img/scifi.jpg'/></button>
-      <button class ='buttons'><img id = 'horror' src = 'img/horror.jpg'/></button>
-      <button class ='buttons'><img id = 'magic' src = 'img/magic.jpg'/></button>
-      <button class ='buttons'><img id = 'chevy' src = 'img/chevy.jpg'/></button>
+        <a href="#">
+          <img id="cult" src="img/cult.jpg" 
+          onmouseover="this.src='img/cult-flip.jpg'"
+          onmouseout="this.src='img/cult.jpg'" alt=""/>
+        </a>
+        <a href="#">
+          <img id="action" src="img/action.jpg" 
+          onmouseover="this.src='img/action-flip.jpg'"
+          onmouseout="this.src='img/action.jpg'" alt=""/>
+        </a>
+        <a href="#">
+          <img id="scifi" src="img/scifi.jpg" 
+          onmouseover="this.src='img/scifi-flip.jpg'"
+          onmouseout="this.src='img/scifi.jpg'" alt=""/>
+        </a>
+        <a href="#">
+          <img id="horror" src="img/horror.jpg" 
+          onmouseover="this.src='img/horror-flip.jpg'"
+          onmouseout="this.src='img/horror.jpg'" alt=""/>
+        </a>
+        <a href="#">
+          <img id="magic" src="img/magic.jpg" 
+          onmouseover="this.src='img/magic-flip.jpg'"
+          onmouseout="this.src='img/magic.jpg'" alt=""/>
+        </a>
+        <a href="#">
+          <img id="chevy" src="img/chevy.jpg" 
+          onmouseover="this.src='img/chevy-flip.jpg'"
+          onmouseout="this.src='img/chevy.jpg'" alt=""/>
+        </a>
     </form>  
     <div id="populate-question">
+      <p id="message"></p>
       <p id="question"></p> 
         <ul id="answers">
           <li id="ans1"></li>
           <li id="ans2"></li>
           <li id="ans3"></li>
           <li id="ans4"></li>
+          <li id="ans5"></li>
         </ul>
     </div>
     <script src="js/app.js"></script>

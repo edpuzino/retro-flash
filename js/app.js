@@ -13,6 +13,7 @@ var chevyQuestions = [];
 var chosenCategory = [];
 var newQuestion = [];
 var alreadyShown = [];
+var message = document.getElementById('message');
 var question = document.getElementById('question');
 var ans1 = document.getElementById('ans1');
 var ans2 = document.getElementById('ans2');
@@ -20,6 +21,8 @@ var ans3 = document.getElementById('ans3');
 var ans4 = document.getElementById('ans4');
 var categories = document.getElementById('categories');
 var answers = document.getElementById('answers');
+var leaders = ['Alex Rogan', 'David Lightman', 'Chevy Chase', 'Han Solo', 'Marty McFly'];
+var scores = [ 340, 310, 290, 280, 250];
 console.log(cultQuestions);
 console.log(actionQuestions);
 console.log(scifiQuestions);
@@ -67,7 +70,7 @@ function populate() {
   new Questions('magic', 'Jim Hensen\'s The Dark Crystal takes place in "another world, another time, in the age of _____."', 'surprise', 'wonder', 'magic', 'uncertainty', 2);
   new Questions('scifi', 'The main street set in Back to the Future is also the main street in what other 80s movie?', 'RoboCop', 'Repo Man', 'Gremlins', 'E.T. the Extra-Terrestrial', 3);
   new Questions('scifi', 'What is the single most valuable commodity in David Lynch\'s Dune?', 'Melange', 'Coffee', 'Salt', 'Plutonium', 1);
-  new Questions('horror', 'Which is NOT a movie directed by John Carpenter?', 'The Fog', 'Halloween II', 'The Thing', 'Prince of Darkness', 2);
+  new Questions('horror', 'Which is not a movie directed by John Carpenter?', 'The Fog', 'Halloween II', 'The Thing', 'Prince of Darkness', 2);
   new Questions('scifi', 'Whose work did NOT influence Blade Runner?', 'Philip K. Dick', 'Dan O\'Bannon', 'Jean Giraud', 'Arthur C. Clarke', 4);
   new Questions('magic', 'What god does Conan the Barbarian worship?', 'Odin', 'Kull', 'Crom', 'Bhaal', 3);
   new Questions('magic', 'What was the first DVD sent out on Netflix in 1998?', 'Beetlejuice', 'The Dark Crystal', 'The NeverEnding Story', 'Gremlins', 1);
@@ -79,7 +82,7 @@ function populate() {
   new Questions('action', 'In Escape from New York, what is the only thing that Snake asks for when escaping?', 'A Shower', 'Water', 'A Phone Call', 'A Ride', 4);
   new Questions('action', 'In They Live, Nada is here to, "Kick Ass and _____?"', 'Take Names', 'Take a Break', 'Right Wrongs', 'Chew Bubblegum', 4);
   new Questions('action', 'In Highlander, the main villain - the Kurgan - says "it\'s better to _____."', 'be alone', 'burn the candle at both ends', 'burn out than to fade away', 'be feared than loved', 3);
-  new Questions('horror', 'In Halloween, what were the teens watching on tv before Michael Myers arrives?', 'War of the Worlds', 'Frankenstein', 'Dracula', 'The Thing from Another World', 4);
+  new Questions('horror', 'Although Jamie Lee Curtis has top billing in Halloween II, she only appears for _____ minutes in the film.', '23', '28', '31', '25', 4);
   new Questions('horror', 'In The Lost Boys, what was the name of the main love interest?', 'Star', 'Peony', 'Soleil', 'Moonflower', 1);
   new Questions('horror', 'In Pet Sematary, what was the name of the evil cat that comes back to life?', 'Josie', 'Kitty', 'Churches', 'Maxy', 3);
   new Questions('scifi', 'In The Thing, what computer game did R.J. MacReady play while sitting in his cabin?', 'Tetris', 'Chess', 'Pong', 'Solitaire', 2);
@@ -105,17 +108,38 @@ function populate() {
   new Questions('cult', 'Which movie on IMDB is rated out of 11 instead of 10?', 'Ghostbusters', 'RoboCop', 'Scarface', 'This is Spinal Tap', 4);
   new Questions('chevy', 'How many National Lampoon\'s Vacation movies came out in the 80s?', 1, 2, 3, 4, 3);
   new Questions('chevy', 'The Griswald family win a trip to Europe on what game show?', 'The Price Is Right', 'You Bet Your Life', 'Pig In A Poke', 'Wacky Wally World', 3);
-  new Questions('chevy', 'In National Lampoon\'s European Vacation, what Monty Python actor do the Griswalds litterally keep running into?', 'Eric Idle', 'John Cleese', 'Terry Gilliam', 'Terry Jones', 1);
-  new Questions('chevy', 'Which "Cheers" actor was in the movie Fletch with Chevy Chase', 'Woody Harrelson', 'Kelsey Grammer', 'George Wendt', 'Ted Danson', 3);
+  new Questions('chevy', 'In National Lampoon\'s European Vacation, what Monty Python actor do the Griswalds literally keep running into?', 'Eric Idle', 'John Cleese', 'Terry Gilliam', 'Terry Jones', 1);
+  new Questions('chevy', 'Which Cheers actor was in the movie Fletch with Chevy Chase?', 'Woody Harrelson', 'Kelsey Grammer', 'George Wendt', 'Ted Danson', 3);
   new Questions('cult', 'Who did not star in the 1982 classic, Fast Times at Ridgemont High?', 'Sean Penn', 'Forest Whitaker', 'Kevin Kline', 'Nicolas Cage', 3);
-  new Questions('chevy', 'What 1980 movie did Chevy Chase turn down a leading role in?', 'Airplane', 'American Gigolo', 'Stir Crazy', 'Private Benjamin', 2);
-  new Questions('chevy', 'What country was Emmett Fitz-Hume and Austin Millbarge sent to in Spies Like Us?', 'Saudi Arabia', 'Iran', 'Pakistan', 'Afghanistan', 3);
+  new Questions('chevy', 'What 1980s movie did Chevy Chase turn down a leading role in?', 'Airplane', 'American Gigolo', 'Stir Crazy', 'Private Benjamin', 2);
+  new Questions('chevy', 'What country were Emmett Fitz-Hume and Austin Millbarge sent to in Spies Like Us?', 'Saudi Arabia', 'Iran', 'Pakistan', 'Afghanistan', 3);
   new Questions('cult', 'In Scarface, Tony Montana came to America from which country?', 'Columbia', 'Puerto Rico', 'Italy', 'Cuba', 4);
-  new Questions('chevy', 'What movie did Chevy Chase star in with Gregory Hines?', 'Deal Of The Century', 'The couch Trip', 'Running Scared', 'Modern Problems', 1);
+  new Questions('chevy', 'What movie did Chevy Chase star in with Gregory Hines?', 'Deal Of The Century', 'The Couch Trip', 'Running Scared', 'Modern Problems', 1);
+  new Questions('action', 'Which popular wrestler starred in the movie They Live?', 'Hulk Hogan', 'Andre The Giant', '"Rowdy" Roddy Piper', 'Jimmy "Superfly" Snuka', 3);
+  new Questions('magic', 'What quintessential 80s rockband performed the soundtrack for Highlander?','Survivor', 'Rush', 'Journey', 'Queen', 4);
+  new Questions('cult', 'In Real Genius, what does Professor Hathaway hate the smell of?', 'Coffee', 'Dirty Sneakers','Popcorn', 'Hairspray', 3);
+  new Questions('magic', 'Who composed the film score for Beetlejuice?', 'John Williams', 'Hans Zimmer', 'Danny Elfman', 'Harold Faltimimer', 3);
+  new Questions('action', 'What type of bird call was used to create the Predator\'s click noise?', 'Wood Pecker', 'Crow', 'Blue Jay', 'cockatoo', 2);
+  new Questions ('action', 'In Big Trouble in Little China, what must the sorceror do to retrieve his physical form?', 'Marry a green eyed girl', 'Sacrifice a pure woman', 'Bring back an ancestor from the dead', 'Kill a dragon', 1);
+  new Questions('action', 'What future date does The Running Man take place in?', '2020', '2001', '2033', '2017', 4);
+  new Questions('action', 'In Die Hard, what special gift does Riggs give Murtaugh at the end of the movie?', 'A special forces patch from his Army uniform', 'An unfired bullet', 'The bullet he was shot with during the movie', 'A zippo lighter he recieved from his deceased wife', 2);
+  new Questions ('cult', 'Complete this famous line from Mad Max, Road Warrior: "A fella, a quick fella, might have a weapon under there it would be a shame if I had to.."', 'take off his hand', 'serve him to the snake', 'pin his head to the panel', 'slit his throat', 3);
+  new Questions ('magic', 'What is the name of Honeythorn Gump\'s fairy friend that accompanies them on their adventure in Legend?', 'Oona', 'Lilly', 'Asteria','Elvina', 1);
+  new Questions ('cult', 'In ending number one of Clue, who killed the cook?', 'Miss Scarlet','The Butler', 'Yvette', 'Professor Plum', 3);
+  new Questions ('chevy', 'What unwanted gift did Clark receive as his bonus during National Lampoon\'s Christmas Vacation?', 'A yearly subscription to Time magazine', 'A yearly subscription to a Jelly of the Month Club', 'A really nice card', 'A designer set of towels', 2);
+  new Questions('chevy', 'What is Chevy Chase\'s real name?', 'Christopher', 'Cornelius', 'Cameron', 'Colton', 2);
+  new Questions('horror', 'How many Evil Dead sequels were made?', '1', '2', '3', '4', 2);
+  new Questions('chevy', 'Which Las Angeles Lakers player made an appearance in the movie Fletch?', 'Magic Johnson', 'Kareem Abdul-Jabbar', 'James Worthy', 'A.C. Green', 2);
+  new Questions('chevy', 'In the movie Fletch, Irwin Fletcher published articles for the Las Angeles Times under which pseudonym?', 'Ann Landers', 'Mark Twain', 'Jane Doe', 'Busy Body', 3);
+  new Questions('horror', 'Chucky first appeared in which 80s horror film?', 'Good Guy', 'Child\'s Play', 'Sleep Tight', 'Let\'s Play', 2);
+  new Questions('horror', 'Which of the following is not a 1980s horror film?', 'The Stuff', 'The Blob', 'The Gate', 'The Slime', 4);
+  new Questions('horror', 'In the 1983 movie The Dead Zone, Christopher Walken\'s character has what special power?', 'He can see the future', 'He can see dead people', 'He can become invisible', 'He can kill people with his mind', 1);
+  new Questions('horror', 'What model car was Christine in the 1983 John Carpenter movie?', '1958 Plymouth Fury', '1954 Buick Skylark', '1957 Ford Thunderbird', '1955 Chrysler 300', 1);
 }
 populate();
 document.getElementById('populate-question').hidden = true;
 
+//Picks the ramdom question from the category selected
 function randomQuestion() {
   var randomNumber = Math.floor(Math.random() * chosenCategory.length);
   newQuestion = chosenCategory[randomNumber];
@@ -124,6 +148,8 @@ function randomQuestion() {
   alreadyShown.push(newQuestion);
 }
 
+
+//Function to make sure the random question hasn't already been asked
 function noRepeats(question){
   for (var i = 0; i < alreadyShown.length; i++){
     if (question !== alreadyShown[i]){
@@ -138,6 +164,8 @@ function noRepeats(question){
 //Function that sends the questions to the form on the game screen
 function sendQuestion() {
   document.getElementById('populate-question').hidden = false;
+  message;
+  message.textContent = '';
   question;
   question.textContent = newQuestion.question;
   ans1;
@@ -154,37 +182,101 @@ function sendQuestion() {
 function pickAnswer(event) {
   event.preventDefault();
   target = event.target.id;
+  message;
+  message.textContent = '';
   console.log(target);
   console.log(newQuestion.correctAns);
   if('ans' + newQuestion.correctAns === target) {
     answers.removeEventListener('click', pickAnswer);
     totalPoints += 50;
-    localStorage.setItem('totalPoints', totalPoints);
-    console.log(totalPoints, target);
     var correctAns = document.getElementById('question');
     correctAns.textContent = 'You have chosen wisely! You now have ' + totalPoints + ' points.' + ' Pick another question.';
     categories.addEventListener('click', pickCategory);
     document.getElementById('answers').hidden = true;
-  } if ('ans' + newQuestion.correctAns !== target) {
+    if(questionsTotal === 0) {
+      localStorage.setItem('totalPoints', 0);
+    }
+  } if('ans' + newQuestion.correctAns !== target) {
     totalPoints += -10;
-    var wrongAns = document.getElementById('question');
-    wrongAns.textContent = 'Wrong! You have lost 10 points. Try again or pick a new question.';
+    if(totalPoints <= -50) {
+      var wrongAns = document.getElementById('message');
+      wrongAns.textContent = 'Wrong Again! You now have ' + totalPoints + ' points.' + ' Wouldn\'t you prefer a nice game of chess?';
+    } else {
+      wrongAns = document.getElementById('message');
+      wrongAns.textContent = 'Great Scott! You now have ' + totalPoints + ' points.' + ' Try again or pick a new question.';
+    }
   }
+  localStorage.setItem('totalPoints', totalPoints);
+  console.log(totalPoints, target);
   checkTen();
 }
 
-
-//Function that runs when the user has answered ten questions, display scoreboard
+//Functions that runs when the user has answered ten questions
 function checkTen() {
-  if (questionsTotal === 9) {
-    document.getElementById('question').hidden = true;
-    document.getElementById('answers').hidden = true;
+  questionsTotal++;
+  console.log(questionsTotal);
+  if (questionsTotal === 10) {
     document.getElementById('categories').hidden = true;
-    //Need to insert the function for the Leader board
-  } else {
-    questionsTotal++;
-    console.log(questionsTotal);
+    checkStorage();
+    checkScore();
+    leaderBoard();
   }
+}
+
+//Function to check for previous leaderboard and if so retrieve it
+function checkStorage() {
+  if(localStorage.leaders) {
+    var getLeaders = localStorage.getItem('leaders');
+    leaders = JSON.parse(getLeaders);
+    var getScores = localStorage.getItem('scores');
+    scores = JSON.parse(getScores);
+  }
+}
+
+//checks the score and adds it to the leaderboard if it's high enough
+function checkScore() {
+  var tempPoints = Number(localStorage.totalPoints);
+  var tempUser = localStorage.userName;
+  leaders;
+  for(var i = 0; i < scores.length; i++) {
+    if(tempPoints >= scores[i]) {
+      var tempScore = scores[i];
+      scores[i] = tempPoints;
+      tempPoints = tempScore;
+      var tempLeader = leaders[i];
+      leaders[i] = tempUser;
+      tempUser = tempLeader;
+    }
+  }
+  var setLeader = JSON.stringify(leaders);
+  localStorage.setItem('leaders', setLeader);
+  var setScores = JSON.stringify(scores);
+  localStorage.setItem('scores', setScores);
+}
+
+//Display the leaderboard
+function leaderBoard() {
+  message = document.getElementById('message');
+  var ans5 = document.getElementById('ans5');
+  ans5.textContent = '';
+  if(totalPoints < 50) {
+    message.textContent = 'Alrighty Then ' + localStorage.userName + ' you scored ' + totalPoints + ' points';
+  } else {
+    message.textContent = 'Congratulations ' + localStorage.userName + ' you scored ' + totalPoints + ' points';
+  }
+  document.getElementById('answers').hidden = false;
+  question.textContent = 'LEADERBOARD';
+  ans1.textContent = '1.   ' + leaders[0] + '   ' + scores[0];
+  ans2.textContent = '2.   ' + leaders[1] + '   ' + scores[1];
+  ans3.textContent = '3.   ' + leaders[2] + '   ' + scores[2];
+  ans4.textContent = '4.   ' + leaders[3] + '   ' + scores[3];
+  ans5.textContent = '5.   ' + leaders[4] + '   ' + scores[4];
+  clearData();
+}
+
+//Runs at the end of the game to clear values for the next game
+function clearData() {
+  totalPoints = 0;
 }
 
 //Function that runs when a player chooses a category
@@ -206,13 +298,17 @@ function pickCategory(event) {
   } else {
     chosenCategory = chevyQuestions;
   }
+  console.log(chosenCategory);
   randomQuestion();
 }
 
 //Event listeners
 categories.addEventListener('click', pickCategory);
 answers.addEventListener('click', pickAnswer);
-//comments.addEventListener('enter', sendComments);
+
+
+
+
 
 
 
